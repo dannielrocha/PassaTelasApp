@@ -2,5 +2,6 @@
     <string name="app_name">PassaTelasApp</string>
     <string name="entrar">Entrar</string>
     <string name="sair">Sair</string>
+    <string name="voltar">Voltar</string>
     <string name="digite_senha">Digite sua senha</string>
 </resources>

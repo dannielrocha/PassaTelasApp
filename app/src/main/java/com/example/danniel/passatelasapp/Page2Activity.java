@@ -11,12 +11,14 @@ public class Page2Activity extends AppCompatActivity {
 
     private Button btnSair;
     private TextView texto;
+    private Button btnVoltar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_page2);
 
+        btnVoltar = (Button) findViewById(R.id.btnVoltar);
         btnSair = (Button) findViewById(R.id.btnSair);
         texto = (TextView) findViewById(R.id.texto);
 
@@ -27,10 +29,11 @@ public class Page2Activity extends AppCompatActivity {
                 " Senha: " +
                 it.getStringExtra("senha"));
 
+        btnVoltar.setOnClickListener(btnVoltarClick);
         btnSair.setOnClickListener(btnSairClick);
     }
 
-    protected View.OnClickListener btnSairClick = new View.OnClickListener() {
+    protected View.OnClickListener btnVoltarClick = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
             Intent it = new Intent();
@@ -39,6 +42,13 @@ public class Page2Activity extends AppCompatActivity {
 
             it.setClassName(pkgName, pkgName+".MainActivity");
             startActivity(it);
+        }
+    };
+
+    protected View.OnClickListener btnSairClick = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            finish();
         }
     };
 }
