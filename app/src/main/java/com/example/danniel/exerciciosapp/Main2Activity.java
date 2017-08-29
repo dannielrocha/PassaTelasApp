@@ -3,6 +3,8 @@ package com.example.danniel.exerciciosapp;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.example.danniel.exerciciosapp.R;
+
 public class Main2Activity extends AppCompatActivity {
 
     @Override

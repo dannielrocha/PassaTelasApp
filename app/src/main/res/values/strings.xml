@@ -5,4 +5,14 @@
     <string name="voltar">Voltar</string>
     <string name="digite_senha">Digite sua senha</string>
     <string name="imp_intent">Intents Implícitas</string>
+    <string-array name="estados">
+        <item>Alagoas</item>
+        <item>Bahia</item>
+        <item>Ceará</item>
+        <item>Maranhão</item>
+        <item>Piauí</item>
+        <item>Sergipe</item>
+        <item>Pernambuco</item>
+        <item>Rio Grande do Norte</item>
+    </string-array>
 </resources>
