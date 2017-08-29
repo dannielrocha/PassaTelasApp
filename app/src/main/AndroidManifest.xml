@@ -2,10 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.danniel.exerciciosapp">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/imp_intent"
+        android:label="@string/teste_ws"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
@@ -17,8 +19,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".Page2Activity" />
-        <activity android:name=".MainActivity"></activity>
-        <activity android:name=".ListaActivity"></activity>
+        <activity android:name=".MainActivity" />
+        <activity android:name=".ListaActivity" />
     </application>
-
 </manifest>

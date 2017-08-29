@@ -5,6 +5,7 @@
     <string name="voltar">Voltar</string>
     <string name="digite_senha">Digite sua senha</string>
     <string name="imp_intent">Intents Implícitas</string>
+    <string name="teste_ws">Teste WebService</string>
     <string-array name="estados">
         <item>Alagoas</item>
         <item>Bahia</item>
@@ -15,4 +16,6 @@
         <item>Pernambuco</item>
         <item>Rio Grande do Norte</item>
     </string-array>
+    <string name="slc_estado">Selecionar Estado</string>
+    <string name="fnd_ws">Buscar no WebService</string>
 </resources>

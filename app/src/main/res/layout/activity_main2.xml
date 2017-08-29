@@ -7,14 +7,25 @@
     tools:context="com.example.danniel.exerciciosapp.Main2Activity">
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btnSelecionar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Button"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
+        android:layout_marginTop="34dp"
+        android:text="@string/fnd_ws" />
+
+    <EditText
+        android:id="@+id/edtTexto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="34dp"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_below="@+id/btnSelecionar"
+        android:layout_marginTop="13dp"
+        android:ems="10"
+        android:inputType="textMultiLine" />
 </RelativeLayout>
