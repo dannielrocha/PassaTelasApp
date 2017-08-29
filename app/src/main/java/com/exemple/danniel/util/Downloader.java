@@ -2,6 +2,7 @@ package com.exemple.danniel.util;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.os.Looper;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -42,20 +43,26 @@ public class Downloader extends AsyncTask<Void,Void,String> {
     protected String doInBackground(Void... params) {
         HttpURLConnection urlConnection = null;
         BufferedReader reader = null;
+
         Log.i(TAG, "Iniciando...");
-        Log.i(TAG, ctx.toString());
-        Log.i(TAG, url.toString());
-        Log.i(TAG, url.getFile());
+        Log.d(TAG, ctx.toString());
+        Log.d(TAG, url.toString());
+        Log.d(TAG, url.getFile());
         try {
             urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setRequestMethod("GET");
             urlConnection.connect();
+
             InputStream inputStream = urlConnection.getInputStream();
             reader = new BufferedReader(new InputStreamReader(inputStream));
+
             String linha;
             StringBuffer buffer = new StringBuffer();
             while((linha = reader.readLine()) != null) {
                 buffer.append(linha);
+
+                Log.i(TAG, "linha = " + linha);
+
                 buffer.append("\n");
             }
             return buffer.toString();
@@ -77,15 +84,23 @@ public class Downloader extends AsyncTask<Void,Void,String> {
 
     @Override
     protected void onPostExecute(String dados) {
-        Log.i(TAG, "ctx.getClass().toString() = " + ctx.getClass().toString());
-        Log.i(TAG, "Main2Activity.class.toString() = " + Main2Activity.class.toString());
+        Log.d(TAG, "ctx.getClass().toString() = " + ctx.getClass().toString());
+        Log.d(TAG, "Main2Activity.class.toString() = " + Main2Activity.class.toString());
         if (ctx instanceof Main2Activity) {
+
+
+            if (dados != null) {
+                dados = dados.replace("\\/", "/").replace(",", "\n");
             ((Main2Activity) ctx).getEdttexto().setText(dados);
-            Log.i(TAG, dados);
-            Log.i(TAG, "setText executado");
+                Log.i(TAG, dados);
+            } else {
+                Log.e(TAG, "Dados não encontrados.");
+            }
+
+            Log.d(TAG, "setText executado");
         } else {
             Log.e(TAG, "setText não executado");
         }
-        Log.i(TAG, "Processo finalizado");
+        Log.d(TAG, "Processo finalizado");
     }
 }
