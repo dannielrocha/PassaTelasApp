@@ -1,4 +1,4 @@
-package com.example.danniel.passatelasapp;
+package com.example.danniel.exerciciosapp;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

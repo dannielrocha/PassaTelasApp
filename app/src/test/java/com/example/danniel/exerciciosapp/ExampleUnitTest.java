@@ -1,4 +1,4 @@
-package com.example.danniel.passatelasapp;
+package com.example.danniel.exerciciosapp;
 
 import org.junit.Test;
 

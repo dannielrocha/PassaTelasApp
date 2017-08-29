@@ -1,4 +1,4 @@
-package com.example.danniel.passatelasapp;
+package com.example.danniel.exerciciosapp;
 
 import android.content.Intent;
 import android.os.Bundle;
