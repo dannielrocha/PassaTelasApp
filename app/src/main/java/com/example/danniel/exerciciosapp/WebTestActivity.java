@@ -5,14 +5,14 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
+import android.widget.TextView;
 
 import com.exemple.danniel.util.Downloader;
 
-public class Main2Activity extends AppCompatActivity {
+public class WebTestActivity extends AppCompatActivity {
 
     Button btnSelecionar;
-    EditText edtTexto;
+    TextView txtView;
 
     Downloader downloader;
 
@@ -25,11 +25,11 @@ public class Main2Activity extends AppCompatActivity {
         btnSelecionar = (Button) findViewById(R.id.btnSelecionar);
         btnSelecionar.setOnClickListener(btnSelecionarClick);
 
-        edtTexto = (EditText) findViewById(R.id.edtTexto);
+        txtView = (TextView) findViewById(R.id.txtView);
     }
 
-    public EditText getEdttexto(){
-        return edtTexto;
+    public TextView getTxtView(){
+        return txtView;
     }
 
     private View.OnClickListener btnSelecionarClick = new View.OnClickListener() {

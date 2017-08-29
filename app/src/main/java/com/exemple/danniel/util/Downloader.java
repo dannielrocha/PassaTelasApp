@@ -2,11 +2,10 @@ package com.exemple.danniel.util;
 
 import android.content.Context;
 import android.os.AsyncTask;
-import android.os.Looper;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.example.danniel.exerciciosapp.Main2Activity;
+import com.example.danniel.exerciciosapp.WebTestActivity;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -16,6 +15,8 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import org.json.*;
+
 /**
  * @author danniel on 29/08/17.
  */
@@ -23,6 +24,7 @@ import java.net.URL;
 public class Downloader extends AsyncTask<Void,Void,String> {
 
     private static final String TAG = "DWLDR";
+    private static final int MAX_LENGHT = 45;
 
     private URL url;
     private Context ctx;
@@ -85,13 +87,31 @@ public class Downloader extends AsyncTask<Void,Void,String> {
     @Override
     protected void onPostExecute(String dados) {
         Log.d(TAG, "ctx.getClass().toString() = " + ctx.getClass().toString());
-        Log.d(TAG, "Main2Activity.class.toString() = " + Main2Activity.class.toString());
-        if (ctx instanceof Main2Activity) {
-
+        Log.d(TAG, "WebTestActivity.class.toString() = " + WebTestActivity.class.toString());
+        if (ctx instanceof WebTestActivity) {
+            StringBuilder aux = new StringBuilder();
 
             if (dados != null) {
-                dados = dados.replace("\\/", "/").replace(",", "\n");
-            ((Main2Activity) ctx).getEdttexto().setText(dados);
+                dados = dados.replace("\\", "");
+                JSONObject poke;
+                try {
+                    poke = new JSONObject(dados);
+                    for (int i = 0; i < poke.length(); i++) {
+                        String chave = poke.names().get(i) + " : ";
+                        String valor = poke.getString(poke.names().get(i).toString());
+                        valor = valor.length() > MAX_LENGHT ? valor.substring(0,MAX_LENGHT) : valor;
+
+                        aux.append(chave + valor + "\n");
+
+                        Log.i(TAG, poke.names().get(i) + " : \t" + poke.getString(poke.names().get(i).toString()));
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+                ((WebTestActivity) ctx).getTxtView().setText(aux.toString());
+
                 Log.i(TAG, dados);
             } else {
                 Log.e(TAG, "Dados não encontrados.");
