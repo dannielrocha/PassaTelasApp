@@ -40,6 +40,7 @@ public class WebTestActivity extends AppCompatActivity {
         @Override
         public void onClick(View view) {
             downloader = new Downloader(thisView);
+            ((WebTestActivity) thisView).getTxtView().setText(R.string.buscando);
             if (!edtCep.getText().toString().isEmpty()) {
                 downloader.setUrl("https://viacep.com.br/ws/"+ edtCep.getText().toString() +"/json/");
                 downloader.execute();

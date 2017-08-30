@@ -93,33 +93,42 @@ public class Downloader extends AsyncTask<Void,Void,String> {
 
             if (dados != null) {
                 JSONObject cep;
+                String chave = "";
+                String valor = "";
+
                 try {
                     cep = new JSONObject(dados);
+
                     for (int i = 0; i < cep.length(); i++) {
-                        String chave = cep.names().get(i) + " : ";
-                        String valor = cep.getString(cep.names().get(i).toString());
+                        chave = cep.names().get(i) + " : ";
+                        valor = cep.getString(cep.names().get(i).toString());
                         valor = valor.length() > MAX_LENGHT ? valor.substring(0,MAX_LENGHT) : valor;
 
                         if (!valor.isEmpty())
                             aux.append(chave + valor + "\n");
 
-                        Log.i(TAG, "linha 111..." + cep.names().get(i) + " : \t" + cep.getString(cep.names().get(i).toString()));
+                        Log.i(TAG, "linha 110..." + cep.names().get(i) + " : \t" + cep.getString(cep.names().get(i).toString()));
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
 
+                if ( !chave.contains("erro") ) {
+                    ((WebTestActivity) ctx).getTxtView().setText(aux.toString());
 
-                ((WebTestActivity) ctx).getTxtView().setText(aux.toString());
+                    Log.d(TAG, "chave = " + chave);
+                    Log.d(TAG, "setText executado");
+                } else {
+                    Toast.makeText(ctx, "Endereço incorreto ou inexistente.", Toast.LENGTH_LONG).show();
+                    ((WebTestActivity) ctx).getTxtView().setText("");
+                }
 
                 Log.i(TAG, dados);
             } else {
                 Log.e(TAG, "Dados não encontrados.");
             }
-
-            Log.d(TAG, "setText executado");
         } else {
-            Log.e(TAG, "setText não executado");
+            Log.e(TAG, "setText não executado porque !'ctx instanceof WebTestActivity'");
         }
         Log.d(TAG, "Processo finalizado");
         cancel(true);
@@ -130,7 +139,7 @@ public class Downloader extends AsyncTask<Void,Void,String> {
             url = new URL(_url);
         } catch (MalformedURLException e) {
             e.printStackTrace();
-            Toast.makeText(ctx, "Endereço (URL) incorreto ou inexistente.", Toast.LENGTH_LONG).show();
+            Toast.makeText(ctx, "Endereço incorreto ou inexistente.", Toast.LENGTH_LONG).show();
         }
     }
 

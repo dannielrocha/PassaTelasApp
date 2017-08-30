@@ -17,5 +17,7 @@
         <item>Rio Grande do Norte</item>
     </string-array>
     <string name="slc_estado">Selecionar Estado</string>
-    <string name="fnd_ws">Buscar no WebService</string>
+    <string name="fnd_ws">Buscar na Web</string>
+    <string name="digite_cep">Digite um CEP (somente números)</string>
+    <string name="buscando">buscando…</string>
 </resources>
