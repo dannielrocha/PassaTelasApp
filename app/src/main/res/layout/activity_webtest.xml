@@ -20,10 +20,24 @@
         android:id="@+id/txtView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentStart="true"
+        android:ellipsize="end"
+        android:ems="10"
+        android:maxLines="15" />
+
+    <EditText
+        android:id="@+id/edtCep"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btnSelecionar"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
+        android:layout_marginBottom="19dp"
         android:ems="10"
-        android:inputType="textMultiLine"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:hint="Digite um CEP"
+        android:inputType="number"
+        android:maxLength="8" />
 </RelativeLayout>

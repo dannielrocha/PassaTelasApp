@@ -1,10 +1,12 @@
 package com.example.danniel.exerciciosapp;
 
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.exemple.danniel.util.Downloader;
@@ -13,15 +15,17 @@ public class WebTestActivity extends AppCompatActivity {
 
     Button btnSelecionar;
     TextView txtView;
-
+    EditText edtCep;
+    Context thisView = this;
     Downloader downloader;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main2);
+        setContentView(R.layout.activity_webtest);
 
-        downloader = new Downloader(this, "http://pokeapi.co/api/v2/pokemon/1/");
+        edtCep = (EditText) findViewById(R.id.edtCep);
+
         btnSelecionar = (Button) findViewById(R.id.btnSelecionar);
         btnSelecionar.setOnClickListener(btnSelecionarClick);
 
@@ -35,11 +39,14 @@ public class WebTestActivity extends AppCompatActivity {
     private View.OnClickListener btnSelecionarClick = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            if (downloader != null) {
+            downloader = new Downloader(thisView);
+            if (!edtCep.getText().toString().isEmpty()) {
+                downloader.setUrl("https://viacep.com.br/ws/"+ edtCep.getText().toString() +"/json/");
                 downloader.execute();
-                Log.i("TAG", "downloader != null");
+                Log.d("TAG", "CEP : " + edtCep.getText().toString());
+                Log.i("TAG", "edtCep.getText() != null");
             } else {
-                Log.i("TAG", "downloader == null");
+                Log.i("TAG", "edtCep.getText() == null");
             }
         }
     };

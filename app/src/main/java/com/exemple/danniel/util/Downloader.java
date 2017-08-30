@@ -29,16 +29,16 @@ public class Downloader extends AsyncTask<Void,Void,String> {
     private URL url;
     private Context ctx;
 
+    public Downloader(Context _ctx) {
+        if (_ctx != null)
+            this.ctx = _ctx;
+    }
+
     public Downloader(Context _ctx, String _url) {
         if (_ctx != null)
             this.ctx = _ctx;
 
-        try {
-            url = new URL(_url);
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-            Toast.makeText(ctx, "Endereço (URL) incorreto ou inexistente.", Toast.LENGTH_LONG).show();
-        }
+        setUrl(_url);
     }
 
     @Override
@@ -47,9 +47,9 @@ public class Downloader extends AsyncTask<Void,Void,String> {
         BufferedReader reader = null;
 
         Log.i(TAG, "Iniciando...");
-        Log.d(TAG, ctx.toString());
-        Log.d(TAG, url.toString());
-        Log.d(TAG, url.getFile());
+        Log.d(TAG, "linha 50... Contexto : " + ctx.toString());
+        Log.d(TAG, "linha 51... URL : " + url.toString());
+
         try {
             urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setRequestMethod("GET");
@@ -63,7 +63,7 @@ public class Downloader extends AsyncTask<Void,Void,String> {
             while((linha = reader.readLine()) != null) {
                 buffer.append(linha);
 
-                Log.i(TAG, "linha = " + linha);
+                Log.i(TAG, "linha 66... linha do buffer = " + linha);
 
                 buffer.append("\n");
             }
@@ -92,18 +92,18 @@ public class Downloader extends AsyncTask<Void,Void,String> {
             StringBuilder aux = new StringBuilder();
 
             if (dados != null) {
-                dados = dados.replace("\\", "");
-                JSONObject poke;
+                JSONObject cep;
                 try {
-                    poke = new JSONObject(dados);
-                    for (int i = 0; i < poke.length(); i++) {
-                        String chave = poke.names().get(i) + " : ";
-                        String valor = poke.getString(poke.names().get(i).toString());
+                    cep = new JSONObject(dados);
+                    for (int i = 0; i < cep.length(); i++) {
+                        String chave = cep.names().get(i) + " : ";
+                        String valor = cep.getString(cep.names().get(i).toString());
                         valor = valor.length() > MAX_LENGHT ? valor.substring(0,MAX_LENGHT) : valor;
 
-                        aux.append(chave + valor + "\n");
+                        if (!valor.isEmpty())
+                            aux.append(chave + valor + "\n");
 
-                        Log.i(TAG, poke.names().get(i) + " : \t" + poke.getString(poke.names().get(i).toString()));
+                        Log.i(TAG, "linha 111..." + cep.names().get(i) + " : \t" + cep.getString(cep.names().get(i).toString()));
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -122,5 +122,19 @@ public class Downloader extends AsyncTask<Void,Void,String> {
             Log.e(TAG, "setText não executado");
         }
         Log.d(TAG, "Processo finalizado");
+        cancel(true);
+    }
+
+    public void setUrl(String _url) {
+        try {
+            url = new URL(_url);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+            Toast.makeText(ctx, "Endereço (URL) incorreto ou inexistente.", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    public URL getUrl(){
+        return url;
     }
 }
