@@ -1,18 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.example.danniel.exerciciosapp.WebTestActivity">
+
+    <TextView
+        android:id="@+id/txtView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:ems="10"
+        android:maxLines="15"
+        android:paddingBottom="@dimen/bottom_margin"/>
 
     <EditText
         android:id="@+id/edtCep"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/btnSelecionar"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
         android:ems="10"
         android:hint="@string/digite_cep"
         android:inputType="number"
@@ -22,21 +29,6 @@
         android:id="@+id/btnSelecionar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/fnd_ws"
-        android:layout_centerVertical="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:text="@string/fnd_ws" />
 
-    <TextView
-        android:id="@+id/txtView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentStart="true"
-        android:ellipsize="end"
-        android:ems="10"
-        android:maxLines="15" />
-
-</RelativeLayout>
+</LinearLayout>

@@ -1,4 +1,4 @@
-package com.exemple.danniel.util;
+package com.example.danniel.util;
 
 import android.content.Context;
 import android.os.AsyncTask;
@@ -7,6 +7,9 @@ import android.widget.Toast;
 
 import com.example.danniel.exerciciosapp.WebTestActivity;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -14,8 +17,6 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-
-import org.json.*;
 
 /**
  * @author danniel on 29/08/17.
@@ -59,7 +60,7 @@ public class Downloader extends AsyncTask<Void,Void,String> {
             reader = new BufferedReader(new InputStreamReader(inputStream));
 
             String linha;
-            StringBuffer buffer = new StringBuffer();
+            StringBuilder buffer = new StringBuilder();
             while((linha = reader.readLine()) != null) {
                 buffer.append(linha);
 
@@ -94,18 +95,22 @@ public class Downloader extends AsyncTask<Void,Void,String> {
             if (dados != null) {
                 JSONObject cep;
                 String chave = "";
-                String valor = "";
+                String valor;
 
                 try {
                     cep = new JSONObject(dados);
 
                     for (int i = 0; i < cep.length(); i++) {
-                        chave = cep.names().get(i) + " : ";
+                        chave = cep.names().get(i).toString();
                         valor = cep.getString(cep.names().get(i).toString());
                         valor = valor.length() > MAX_LENGHT ? valor.substring(0,MAX_LENGHT) : valor;
 
-                        if (!valor.isEmpty())
-                            aux.append(chave + valor + "\n");
+                        if (!valor.isEmpty()) {
+                            aux.append(chave);
+                            aux.append(" : ");
+                            aux.append(valor);
+                            aux.append("\n");
+                        }
 
                         Log.i(TAG, "linha 110..." + cep.names().get(i) + " : \t" + cep.getString(cep.names().get(i).toString()));
                     }

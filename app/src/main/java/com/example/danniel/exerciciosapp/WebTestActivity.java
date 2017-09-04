@@ -1,21 +1,27 @@
 package com.example.danniel.exerciciosapp;
 
 import android.content.Context;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.exemple.danniel.util.Downloader;
+import com.example.danniel.util.Downloader;
 
+import org.androidannotations.annotations.Click;
+import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.ViewById;
+
+@EActivity
 public class WebTestActivity extends AppCompatActivity {
 
-    Button btnSelecionar;
+    @ViewById(R.id.txtView)
     TextView txtView;
+
+    @ViewById(R.id.edtCep)
     EditText edtCep;
+
     Context thisView = this;
     Downloader downloader;
 
@@ -24,23 +30,23 @@ public class WebTestActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_webtest);
 
-        edtCep = (EditText) findViewById(R.id.edtCep);
+        //edtCep = (EditText) findViewById(R.id.edtCep);
 
-        btnSelecionar = (Button) findViewById(R.id.btnSelecionar);
-        btnSelecionar.setOnClickListener(btnSelecionarClick);
+        //btnSelecionar = (Button) findViewById(R.id.btnSelecionar);
+        //btnSelecionar.setOnClickListener(btnSelecionarClick);
 
-        txtView = (TextView) findViewById(R.id.txtView);
+        //txtView = (TextView) findViewById(R.id.txtView);
     }
 
     public TextView getTxtView(){
         return txtView;
     }
 
-    private View.OnClickListener btnSelecionarClick = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
+    @Click
+    void btnSelecionar() {
             downloader = new Downloader(thisView);
-            ((WebTestActivity) thisView).getTxtView().setText(R.string.buscando);
+            txtView.setText(R.string.buscando);
+
             if (!edtCep.getText().toString().isEmpty()) {
                 downloader.setUrl("https://viacep.com.br/ws/"+ edtCep.getText().toString() +"/json/");
                 downloader.execute();
@@ -49,6 +55,5 @@ public class WebTestActivity extends AppCompatActivity {
             } else {
                 Log.i("TAG", "edtCep.getText() == null");
             }
-        }
-    };
+    }
 }
